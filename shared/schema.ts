@@ -16,8 +16,8 @@ export const projects = pgTable("projects", {
 export const skills = pgTable("skills", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  category: text("category").notNull(), // 'Frontend', 'Backend', 'Tools', etc.
-  proficiency: integer("proficiency").default(0), // 0-100
+  category: text("category").notNull(), 
+  proficiency: integer("proficiency").default(0), 
 });
 
 export const experience = pgTable("experience", {
@@ -36,6 +36,18 @@ export const education = pgTable("education", {
   duration: text("duration").notNull(),
 });
 
+export const profile = pgTable("profile", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  title: text("title").notNull(),
+  summary: text("summary").notNull(),
+  email: text("email"),
+  phone: text("phone"),
+  location: text("location"),
+  github: text("github"),
+  linkedin: text("linkedin"),
+});
+
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -48,6 +60,7 @@ export const insertProjectSchema = createInsertSchema(projects).omit({ id: true,
 export const insertSkillSchema = createInsertSchema(skills).omit({ id: true });
 export const insertExperienceSchema = createInsertSchema(experience).omit({ id: true });
 export const insertEducationSchema = createInsertSchema(education).omit({ id: true });
+export const insertProfileSchema = createInsertSchema(profile).omit({ id: true });
 export const insertMessageSchema = createInsertSchema(messages).omit({ id: true, createdAt: true });
 
 export type Project = typeof projects.$inferSelect;
@@ -58,5 +71,7 @@ export type Experience = typeof experience.$inferSelect;
 export type InsertExperience = z.infer<typeof insertExperienceSchema>;
 export type Education = typeof education.$inferSelect;
 export type InsertEducation = z.infer<typeof insertEducationSchema>;
+export type Profile = typeof profile.$inferSelect;
+export type InsertProfile = z.infer<typeof insertProfileSchema>;
 export type Message = typeof messages.$inferSelect;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;

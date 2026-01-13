@@ -5,6 +5,7 @@ import {
   messages,
   experience,
   education,
+  profile,
   type Project,
   type InsertProject,
   type Skill,
@@ -14,10 +15,15 @@ import {
   type Experience,
   type InsertExperience,
   type Education,
-  type InsertEducation
+  type InsertEducation,
+  type Profile,
+  type InsertProfile
 } from "@shared/schema";
 
 export interface IStorage {
+  getProfile(): Promise<Profile | undefined>;
+  createProfile(profile: InsertProfile): Promise<Profile>;
+
   getProjects(): Promise<Project[]>;
   createProject(project: InsertProject): Promise<Project>;
   
@@ -34,6 +40,16 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
+  async getProfile(): Promise<Profile | undefined> {
+    const [userProfile] = await db.select().from(profile);
+    return userProfile;
+  }
+
+  async createProfile(insertProfile: InsertProfile): Promise<Profile> {
+    const [userProfile] = await db.insert(profile).values(insertProfile).returning();
+    return userProfile;
+  }
+
   async getProjects(): Promise<Project[]> {
     return await db.select().from(projects);
   }

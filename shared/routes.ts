@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertMessageSchema, projects, skills, messages, experience, education } from './schema';
+import { insertMessageSchema, projects, skills, messages, experience, education, profile } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -12,6 +12,15 @@ export const errorSchemas = {
 };
 
 export const api = {
+  profile: {
+    get: {
+      method: 'GET' as const,
+      path: '/api/profile',
+      responses: {
+        200: z.custom<typeof profile.$inferSelect>(),
+      },
+    },
+  },
   projects: {
     list: {
       method: 'GET' as const,
