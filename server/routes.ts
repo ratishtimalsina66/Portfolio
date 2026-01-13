@@ -18,6 +18,16 @@ export async function registerRoutes(
     res.json(skills);
   });
 
+  app.get(api.experience.list.path, async (req, res) => {
+    const exp = await storage.getExperience();
+    res.json(exp);
+  });
+
+  app.get(api.education.list.path, async (req, res) => {
+    const edu = await storage.getEducation();
+    res.json(edu);
+  });
+
   app.post(api.contact.submit.path, async (req, res) => {
     try {
       const input = api.contact.submit.input.parse(req.body);
@@ -62,13 +72,26 @@ async function seedDatabase() {
     tags: ["Vue.js", "Firebase", "Tailwind"]
   });
 
-  await storage.createProject({
-    title: "Task Management Tool",
-    description: "Collaborative task management application with kanban boards and team workspaces.",
-    imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800",
-    projectUrl: "https://example.com",
-    repoUrl: "https://github.com",
-    tags: ["React", "Redux", "Express", "PostgreSQL"]
+  await storage.createExperience({
+    company: "Tech Solutions Inc.",
+    position: "Senior Full Stack Developer",
+    location: "San Francisco, CA",
+    duration: "2021 - Present",
+    description: "Led development of multiple high-scale web applications using React, Node.js, and PostgreSQL. Mentored junior developers and improved CI/CD pipelines."
+  });
+
+  await storage.createExperience({
+    company: "Digital Innovations",
+    position: "Full Stack Developer",
+    location: "Austin, TX",
+    duration: "2018 - 2021",
+    description: "Developed and maintained various client websites. Implemented responsive designs and optimized backend performance."
+  });
+
+  await storage.createEducation({
+    institution: "University of Technology",
+    degree: "Bachelor of Science in Computer Science",
+    duration: "2014 - 2018"
   });
 
   await storage.createSkill({ name: "React", category: "Frontend", proficiency: 90 });
@@ -76,5 +99,4 @@ async function seedDatabase() {
   await storage.createSkill({ name: "Node.js", category: "Backend", proficiency: 80 });
   await storage.createSkill({ name: "PostgreSQL", category: "Database", proficiency: 75 });
   await storage.createSkill({ name: "Tailwind CSS", category: "Frontend", proficiency: 95 });
-  await storage.createSkill({ name: "Docker", category: "DevOps", proficiency: 60 });
 }
