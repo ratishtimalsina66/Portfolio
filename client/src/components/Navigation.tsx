@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Work" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
+  { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -42,7 +43,7 @@ export function Navigation() {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="#" className="text-2xl font-bold font-display tracking-tight hover:opacity-80 transition-opacity">
-            Portfolio.
+            {scrolled ? "SM." : "Santosh Mandal"}
           </a>
 
           {/* Desktop Nav */}
