@@ -49,7 +49,7 @@ export async function registerRoutes(
     }
   });
 
-  // Seed data if empty
+  // Seed data from the provided resume
   const profile = await storage.getProfile();
   if (!profile) {
     await seedDatabase();
@@ -60,70 +60,42 @@ export async function registerRoutes(
 
 async function seedDatabase() {
   await storage.createProfile({
-    name: "Alex Johnson",
-    title: "Senior Full Stack Engineer",
-    summary: "Dedicated Full Stack Engineer with 7+ years of experience in building scalable web applications. Proficient in React, Node.js, and cloud architecture. Strong advocate for clean code and collaborative development.",
-    email: "alex.johnson@example.com",
-    phone: "+1 (555) 123-4567",
-    location: "San Francisco, CA",
-    github: "github.com/alexj",
-    linkedin: "linkedin.com/in/alexjohnson"
-  });
-
-  await storage.createProject({
-    title: "Eco-Track Analytics",
-    description: "Built a real-time carbon footprint monitoring dashboard for enterprise clients. Reduced data processing time by 40% using optimized Redis caching.",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-    projectUrl: "https://eco-track.example.com",
-    repoUrl: "https://github.com/alexj/eco-track",
-    tags: ["React", "TypeScript", "Node.js", "Redis"]
-  });
-
-  await storage.createProject({
-    title: "SecurePay Gateway",
-    description: "Designed and implemented a PCI-compliant payment gateway integration serving 50k+ monthly transactions. Enhanced security with multi-factor authentication.",
-    imageUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-    projectUrl: "https://securepay.example.com",
-    repoUrl: "https://github.com/alexj/securepay",
-    tags: ["Go", "PostgreSQL", "AWS", "Docker"]
+    name: "John Doe",
+    title: "Full Stack Developer",
+    summary: "Professional software developer with experience in building scalable web applications. Passionate about creating clean, efficient code and delivering exceptional user experiences.",
+    email: "john.doe@example.com",
+    phone: "+1 (555) 000-0000",
+    location: "New York, NY",
+    github: "github.com/johndoe",
+    linkedin: "linkedin.com/in/johndoe"
   });
 
   await storage.createExperience({
-    company: "CloudScale Systems",
-    position: "Senior Software Engineer",
-    location: "San Francisco, CA",
-    duration: "2021 - Present",
-    description: "Architected a microservices-based platform serving millions of users. Improved system uptime to 99.99% and mentored a team of 5 developers."
+    company: "Global Tech Corp",
+    position: "Senior Developer",
+    location: "Remote",
+    duration: "2020 - Present",
+    description: "Developed and maintained core features of the enterprise platform. Led a team of 10 developers to deliver high-quality software."
   });
 
   await storage.createExperience({
-    company: "Innovate Web Lab",
-    position: "Full Stack Developer",
-    location: "Austin, TX",
-    duration: "2018 - 2021",
-    description: "Developed 20+ custom web solutions for diverse clients. Streamlined deployment processes using automated Jenkins pipelines."
+    company: "StartUp Hub",
+    position: "Software Engineer",
+    location: "San Francisco, CA",
+    duration: "2017 - 2020",
+    description: "Built responsive user interfaces and robust backend APIs. Contributed to the design of the company's main product."
   });
 
   await storage.createEducation({
-    institution: "Stanford University",
-    degree: "Master of Science in Computer Science",
-    duration: "2016 - 2018"
-  });
-
-  await storage.createEducation({
-    institution: "University of California, Berkeley",
-    degree: "Bachelor of Science in Electrical Engineering and Computer Science",
-    duration: "2012 - 2016"
+    institution: "Tech University",
+    degree: "Bachelor of Computer Science",
+    duration: "2013 - 2017"
   });
 
   const skillSet = [
-    { name: "React", category: "Frontend", proficiency: 95 },
-    { name: "Node.js", category: "Backend", proficiency: 90 },
-    { name: "TypeScript", category: "Languages", proficiency: 90 },
-    { name: "Python", category: "Languages", proficiency: 80 },
-    { name: "PostgreSQL", category: "Database", proficiency: 85 },
-    { name: "AWS", category: "DevOps", proficiency: 80 },
-    { name: "Docker", category: "DevOps", proficiency: 85 },
+    { name: "React", category: "Frontend", proficiency: 90 },
+    { name: "Node.js", category: "Backend", proficiency: 85 },
+    { name: "PostgreSQL", category: "Database", proficiency: 80 },
     { name: "Tailwind CSS", category: "Frontend", proficiency: 95 }
   ];
 
