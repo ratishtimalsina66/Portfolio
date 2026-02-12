@@ -43,7 +43,7 @@ export function Navigation() {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="#" className="text-2xl font-bold font-display tracking-tight hover:opacity-80 transition-opacity">
-            {scrolled ? "SM." : "Santosh Mandal"}
+            {scrolled ? "RT." : "Ratish Timalsina"}
           </a>
 
           {/* Desktop Nav */}

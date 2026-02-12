@@ -19,7 +19,6 @@ import {
   type Profile,
   type InsertProfile
 } from "@shared/schema";
-import { sql } from "drizzle-orm";
 
 export interface IStorage {
   getProfile(): Promise<Profile | undefined>;
@@ -38,7 +37,6 @@ export interface IStorage {
   createEducation(edu: InsertEducation): Promise<Education>;
   
   createMessage(message: InsertMessage): Promise<Message>;
-  clearAllData(): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -91,14 +89,6 @@ export class DatabaseStorage implements IStorage {
   async createMessage(insertMessage: InsertMessage): Promise<Message> {
     const [message] = await db.insert(messages).values(insertMessage).returning();
     return message;
-  }
-
-  async clearAllData(): Promise<void> {
-    await db.delete(profile);
-    await db.delete(projects);
-    await db.delete(skills);
-    await db.delete(experience);
-    await db.delete(education);
   }
 }
 
